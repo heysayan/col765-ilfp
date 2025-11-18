@@ -1,0 +1,75 @@
+Perfect! I've successfully developed the interpreter frontend using Ocamllex and Ocamlyacc for your resolution engine. Here's what has been created:
+
+📦 New Components Created
+1. lexer.mll - Lexical Analyzer
+Tokenizes Prolog-like syntax
+Supports variables (uppercase), constants (lowercase)
+Handles logical operators (Not, And, Or, Implies, Iff)
+Supports comments: % single-line and (* multi-line *)
+Special tokens: Q= for queries, :- for rules
+2. parser.mly - Grammar Specification
+LALR(1) parser using Ocamlyacc
+Parses facts, rules, and queries into AST
+Proper operator precedence (IFF > Implies > Or > And > Not)
+Builds AST compatible with assgn7.ml resolution engine
+3. assgn9.ml - Main Interpreter
+Integrates lexer, parser, and resolution engine
+Interactive REPL for live queries
+File-based execution for batch processing
+Pretty printing for readable output
+Error reporting with line/column numbers
+4. Makefile - Build Configuration
+Automated build process
+Targets: bytecode, native, clean, test, help
+5. test_program.pl - Example Program
+Family relationship examples
+Demonstrates facts, rules, and queries
+Logical operators and negation examples
+6. DOCUMENTATION.md - Comprehensive Documentation
+assgn7.ml: Complete coverage of resolution engine, unification (MGU), SLD-resolution
+assgn8.ml: Documentation of lambda calculus interpreter with Krivine machine
+Frontend: Detailed lexer/parser documentation, grammar specification, examples
+Implementation details, algorithms, and usage instructions
+🎯 Features
+✅ Professional lexer/parser using industry-standard tools
+✅ Interactive REPL mode
+✅ Batch file processing
+✅ Pretty printing and error reporting
+✅ Full Horn clause support with unification
+✅ Logical operators: Not, And, Or, Implies, Iff
+✅ Comment support (multi-line and single-line)
+
+🚀 Usage
+Build the Project
+make bytecode
+Interactive Mode
+./prolog_engine
+Run from File
+./prolog_engine test_program.pl
+📝 Example Syntax
+% Facts
+father(ramesh, rohan).
+mother(sita, rohan).
+
+% Rules
+parent(X, Y) :- father(X, Y).
+mother(X, Y) :- wife(X, Z), father(Z, Y).
+
+% Queries
+Q= father(ramesh, X).
+Q= parent(M, rohan).
+📚 Documentation Structure
+The DOCUMENTATION.md file includes:
+
+Overview and architecture
+Resolution engine (assgn7.ml) - types, algorithms, examples
+Lambda calculus (assgn8.ml) - Krivine machine, evaluation
+Frontend components - lexer, parser, main interpreter
+Building and usage instructions
+Grammar specification
+Implementation details and algorithms
+Extensive examples and test cases
+✅ Git Status
+All changes have been committed and pushed to branch: claude/add-interpreter-frontend-01Ra173uai3dGmB2bAzpWK1w
+
+You can now build and test the frontend in your local environment with OCaml installed!
