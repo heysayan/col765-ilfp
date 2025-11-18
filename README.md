@@ -172,5 +172,133 @@ You need to:
 Define closures appropriately
 Implement the execution of the Krivine machine until it cannot make any further steps.
 Implement the "unload" function, that takes a Krivine machine configuration and unravels the resulting closure (and any stacked arguments) into a lambda term. 
-Again, you need to provide enough input cases to show your program runs correctly.  Suggestion: You may use some of the examples that encode pairing and conditionals. 
+Again, you need to provide enough input cases to show your program runs correctly.  Suggestion: You may use some of the examples that encode pairing and conditionals.
+
+
+## Assignment 9: Interpreter Frontend using Ocamllex and Ocamlyacc
+
+### Overview
+Building on Assignment 7's resolution engine, this assignment implements a professional parser frontend using Ocamllex (lexer generator) and Ocamlyacc (parser generator) to parse Prolog-like programs into ASTs for the resolution engine.
+
+### Quick Start
+
+#### Build
+```bash
+make bytecode
+```
+
+#### Run Interactive REPL
+```bash
+./prolog_engine
+```
+
+#### Run Program from File
+```bash
+./prolog_engine test_program.pl
+```
+
+### New Components
+
+```
+Frontend Components:
+├── lexer.mll         # Lexical analyzer (Ocamllex)
+├── parser.mly        # Grammar specification (Ocamlyacc)
+├── assgn9.ml         # Main interpreter frontend
+├── Makefile          # Build configuration
+├── test_program.pl   # Example test program
+└── DOCUMENTATION.md  # Comprehensive documentation
+```
+
+### Features
+
+- ✅ **Professional Lexer** using Ocamllex for tokenization
+- ✅ **LALR(1) Parser** using Ocamlyacc with precedence handling
+- ✅ **Interactive REPL** for live queries
+- ✅ **File-based execution** for batch processing
+- ✅ **Pretty printing** for readable output
+- ✅ **Error reporting** with line/column numbers
+- ✅ **Comment support** (multi-line and single-line)
+
+### Language Syntax
+
+#### Facts
+```prolog
+father(ramesh, rohan).
+mother(sita, rohan).
+```
+
+#### Rules
+```prolog
+parent(X, Y) :- father(X, Y).
+parent(X, Y) :- mother(X, Y).
+mother(X, Y) :- wife(X, Z), father(Z, Y).
+```
+
+#### Queries
+```prolog
+Q= father(ramesh, X).
+Q= parent(X, rohan).
+Q= mother(M, N), father(F, N).
+```
+
+#### Logical Operators
+```prolog
+Not friend(ravan, ram).
+(p And q) Or r.
+p Implies q.
+p Iff q.
+```
+
+#### Comments
+```prolog
+% Single-line comment
+(* Multi-line comment *)
+```
+
+### Example Session
+
+```bash
+$ ./prolog_engine test_program.pl
+
+Loading program from: test_program.pl
+
+Program loaded successfully.
+Facts and Rules:
+  father(ramesh, rohan).
+  mother(X, Y) :- wife(X, Z), father(Z, Y).
+
+Running queries...
+
+========== Query 1 ==========
+Query: Q= father(ramesh, X).
+Success!
+Solutions:
+  1. {X = rohan}
+```
+
+### Build Targets
+
+```bash
+make bytecode     # Build bytecode executable (default)
+make native       # Build native code executable (faster)
+make clean        # Remove generated files
+make test         # Run test program
+make help         # Show available targets
+```
+
+### Documentation
+
+See **[DOCUMENTATION.md](DOCUMENTATION.md)** for comprehensive documentation including:
+- Detailed algorithm descriptions
+- Complete API reference
+- Grammar specification
+- Implementation details
+- Examples and test cases
+- Theoretical background
+
+### Requirements
+
+- OCaml 4.08 or later
+- Ocamllex (lexer generator)
+- Ocamlyacc (parser generator)
 
